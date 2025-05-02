@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ARImageTracking.unity
     guid: b384cca1785699944be8b7b32bd0dd02
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 5852e41a55e25554eb46241e8958b684
   m_configObjects:
     AR Foundation RemoteARFoundationRemoteLoaderSettings: {fileID: 11400000, guid: f0b36c3aef5d92c4fbbea2a98e4ef43a,
       type: 2}
