@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BattleSystem : MonoBehaviour
 {
@@ -26,6 +25,8 @@ public class BattleSystem : MonoBehaviour
     // test용. 나중에 수정
     public TextMeshProUGUI playerHpTMP;
     public TextMeshProUGUI enemyHpTMP;
+    public GameObject winButton;
+    public GameObject loseButton;
 
     private void Awake()
     {
@@ -52,11 +53,14 @@ public class BattleSystem : MonoBehaviour
 
         if (winImage != null) winImage.SetActive(false);
         if (loseImage != null) loseImage.SetActive(false);
+
+        if (winButton != null) winButton.SetActive(false);
+        if (loseButton != null) loseButton.SetActive(false);
     }
 
     private void Update()
     {
-        if (turn == Turn.PlayerAnimation)
+        if ((turn == Turn.PlayerAnimation) || (turn == Turn.EnemyAnimation))
         {
             tick += Time.deltaTime;
 
@@ -65,23 +69,15 @@ public class BattleSystem : MonoBehaviour
                 tick = 0;
                 NextTurn();
             }
-        } else if (turn == Turn.EnemyWait)
+        } 
+        else if (turn == Turn.EnemyWait)
         {
             NextTurn();
-        } else if (turn == Turn.EnemyAnimation)
-        {
-            tick += Time.deltaTime;
-
-            if (tick >= 1)
-            {
-                tick = 0;
-                NextTurn();
-            }
-        }
+        } 
 
         //test용. 나중에 수정
-        playerHpTMP.text = "PlayerHP: " + player.hp.ToString();
-        enemyHpTMP.text = "EnemyHP: " + enemy.hp.ToString();
+        playerHpTMP.text = "Player HP: " + player.hp.ToString();
+        enemyHpTMP.text = "Enemy HP: " + enemy.hp.ToString();
     }
 
     public void UseCard(Card cardSO)
@@ -136,6 +132,8 @@ public class BattleSystem : MonoBehaviour
         {
             if (winImage != null) winImage.SetActive(true);
 
+            if (winButton != null) winButton.SetActive(true);
+
             //player.ResetCards();
             //CardType randomType = (CardType)UnityEngine.Random.Range(0, 3);
             //player.AddCardReward(randomType);
@@ -144,8 +142,22 @@ public class BattleSystem : MonoBehaviour
         {
             if (loseImage != null) loseImage.SetActive(true);
 
+            if (loseButton != null) loseButton.SetActive(true);
+
             //player.ResetCards();
         }
+    }
+
+    public void Button_Win()
+    {
+        // SET Scene 1 to ARImageTrackingScene!!
+        SceneManager.LoadScene(1);
+    }
+
+    public void Button_Lose()
+    {
+        // SET Scene 0 to MainMenuScene!!
+        SceneManager.LoadScene(0);
     }
 
     private void SpawnPlayerCards()

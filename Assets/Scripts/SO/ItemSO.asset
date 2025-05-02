@@ -17,20 +17,20 @@ MonoBehaviour:
     description: Gives 2 damage.
     attackInt: 2
     effectInt: 0
-    sprite: {fileID: 21300000, guid: edc5652c8ee385c4895e3a2ae37a142b, type: 3}
+    sprite: {fileID: 21300000, guid: b5ef8dd8a9065c74ebd992680c96d0b7, type: 3}
     frequency: 30
     cardSO: {fileID: 11400000, guid: 288f9ebf598ba7b40b3b16d5afa04474, type: 2}
   - name: Defence
     description: Blocks next attack.
     attackInt: 0
     effectInt: 1
-    sprite: {fileID: 21300000, guid: 20a980728b9ecb547923a4b416f2969d, type: 3}
+    sprite: {fileID: 21300000, guid: b1c9b94ebba47774380142f8f0f53bbc, type: 3}
     frequency: 20
     cardSO: {fileID: 11400000, guid: 4e079bcf4691b364693b38bc056450bc, type: 2}
   - name: Explosion
     description: Gives 5 damage.
     attackInt: 5
     effectInt: 0
-    sprite: {fileID: 21300000, guid: e6300952c23855f42abdd0ce39bfe4c7, type: 3}
+    sprite: {fileID: 21300000, guid: 7553cc9a7a336764a8629afa2d399a6c, type: 3}
     frequency: 10
     cardSO: {fileID: 11400000, guid: 39b12058fb3fe5e488b95316d429469f, type: 2}

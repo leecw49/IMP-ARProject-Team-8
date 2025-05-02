@@ -15,6 +15,10 @@ public class CardUIManager : MonoBehaviour
     private List<RectTransform> spawnedCards = new List<RectTransform>();
     private List<Item> itemBuffer = new List<Item>();
 
+    private float tick = 0;
+    private bool isCardTickOn = false;
+    private Card clickedCardSO;
+
     private void Awake()
     {
         Inst = this;
@@ -74,6 +78,7 @@ public class CardUIManager : MonoBehaviour
         ui.Initialize(item, OnCardClicked);
     }
 
+    // Used for testing. 
     void OnCardClicked(CardUI clickedCard)
     {
         Debug.Log($"Clicked card: {clickedCard.GetItem().name}");
@@ -100,6 +105,7 @@ public class CardUIManager : MonoBehaviour
         // TODO: battle logic trigger
     }
 
+    // Use this tirgger.
     public void OnCardClickedExternally(CardUI clickedCard)
     {
         Debug.Log($"Clicked card: {clickedCard.GetItem().name}");
@@ -124,8 +130,22 @@ public class CardUIManager : MonoBehaviour
         DOVirtual.DelayedCall(0.6f, () => DestroySpwanedCards());
 
         // TODO: battle logic trigger
-        Card cardSO = clickedCard.GetItem().cardSO;
-        BattleSystem.Inst.UseCard(cardSO);
+        clickedCardSO = clickedCard.GetItem().cardSO;
+        isCardTickOn = true;
+    }
+
+    private void Update()
+    {
+        if (isCardTickOn)
+        {
+            tick += Time.deltaTime;
+            if (tick >= 1)
+            {
+                tick = 0;
+                isCardTickOn = false;
+                BattleSystem.Inst.UseCard(clickedCardSO);
+            }
+        }
     }
 
     /// <summay>
