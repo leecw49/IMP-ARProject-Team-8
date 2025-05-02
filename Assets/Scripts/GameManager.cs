@@ -9,7 +9,7 @@ public class GameManager : Singleton<GameManager>
 
     public GameObject battleSystem;
 
-    public GameObject menuPanel;
+    public GameObject startPanel;
     public GameObject gamePanel;
 
     public RectTransform EnemyGroup;
@@ -23,7 +23,7 @@ public class GameManager : Singleton<GameManager>
     {
         gameCam.SetActive(true);
 
-        menuPanel.SetActive(false);
+        startPanel.SetActive(false);
 
         player.gameObject.SetActive(true);
     }
