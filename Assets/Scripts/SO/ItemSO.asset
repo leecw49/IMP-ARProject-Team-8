@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32dd564e5b2dad34bac73f9ca058672e, type: 3}
+  m_Name: ItemSO
+  m_EditorClassIdentifier: 
+  items:
+  - name: Attack
+    description: Gives 2 damage.
+    attackInt: 2
+    effectInt: 0
+    sprite: {fileID: 21300000, guid: edc5652c8ee385c4895e3a2ae37a142b, type: 3}
+    frequency: 30
+    cardSO: {fileID: 11400000, guid: 288f9ebf598ba7b40b3b16d5afa04474, type: 2}
+  - name: Defence
+    description: Blocks next attack.
+    attackInt: 0
+    effectInt: 1
+    sprite: {fileID: 21300000, guid: 20a980728b9ecb547923a4b416f2969d, type: 3}
+    frequency: 20
+    cardSO: {fileID: 11400000, guid: 4e079bcf4691b364693b38bc056450bc, type: 2}
+  - name: Explosion
+    description: Gives 5 damage.
+    attackInt: 5
+    effectInt: 0
+    sprite: {fileID: 21300000, guid: e6300952c23855f42abdd0ce39bfe4c7, type: 3}
+    frequency: 10
+    cardSO: {fileID: 11400000, guid: 39b12058fb3fe5e488b95316d429469f, type: 2}
