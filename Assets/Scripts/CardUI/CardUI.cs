@@ -92,7 +92,7 @@ public class CardUI : MonoBehaviour
     public void SetHighlight(bool active)
     {
         highlightOverlay.enabled = active;
-        descriptionTMP.enabled = active;
+        descriptionTMP.gameObject.SetActive(active);
     }
 
     public void AnimateUP()
