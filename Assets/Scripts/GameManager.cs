@@ -3,22 +3,22 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    public GameObject gameCam;
-    public Player player;
+    //public GameObject gameCam;
+    //public Player player;
     public Enemy enemy;
 
-    public GameObject battleSystem;
+    //public GameObject battleSystem;
 
-    public GameObject menuPanel;
-    public GameObject gamePanel;
+    //public GameObject menuPanel;
+    //public GameObject gamePanel;
 
-    public RectTransform EnemyGroup;
-    public RectTransform EnemyHealthBar;
+    //public RectTransform EnemyGroup;
+    //public RectTransform EnemyHealthBar;
 
-    public RectTransform PlayerGroup;
-    public RectTransform PlayerHealthBar;
+    //public RectTransform PlayerGroup;
+    //public RectTransform PlayerHealthBar;
 
-
+    /*
     public void GameStart()
     {
         gameCam.SetActive(true);
@@ -27,6 +27,7 @@ public class GameManager : Singleton<GameManager>
 
         player.gameObject.SetActive(true);
     }
+    */
 
     /*
     void LateUpdate()
@@ -45,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     }
     */
 
+    /*
     public void NewBattle(GameObject enemy)
     {
         SceneManager.LoadScene("BattleScene");
@@ -52,10 +54,10 @@ public class GameManager : Singleton<GameManager>
         battleSystem.GetComponent<BattleSystem>().enemy = enemy.GetComponent<Enemy>();
         gamePanel.SetActive(true);
     }
+    */
 
-    // test용. 나중에 지울 것
-    public void SceneButton_BattleScene()
+    public void SceneButton_1()
     {
-        SceneManager.LoadScene("BattleScene");
+        SceneManager.LoadScene(1);
     }
 }

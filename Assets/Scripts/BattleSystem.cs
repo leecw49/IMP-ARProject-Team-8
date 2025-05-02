@@ -36,7 +36,8 @@ public class BattleSystem : MonoBehaviour
 
     private void Init()
     {
-        player = GameManager.Instance.player;
+        //player = GameManager.Instance.player;
+        player = Player.Instance;
 
         // test용. 나중에 수정
         enemy = FindAnyObjectByType<Enemy>();
@@ -115,11 +116,11 @@ public class BattleSystem : MonoBehaviour
                     enemy.hp = Math.Min(enemy.hp + healAction.amount, enemy.maxHp);
                 }
                 */
+                player.TakeDamage(3);
                 turn = Turn.EnemyAnimation;
                 break;
             case Turn.EnemyAnimation:
                 //enemy.NewAction();
-                player.TakeDamage(3);
                 turn = Turn.PlayerWait;
                 SpawnPlayerCards();
                 break;
