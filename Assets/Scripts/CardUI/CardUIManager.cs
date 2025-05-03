@@ -81,28 +81,7 @@ public class CardUIManager : MonoBehaviour
     // Used for testing. 
     void OnCardClicked(CardUI clickedCard)
     {
-        Debug.Log($"Clicked card: {clickedCard.GetItem().name}");
-
-        foreach (var rt in spawnedCards)
-        {
-            CardUI cardUI = rt.GetComponent<CardUI>();
-            if (cardUI != null)
-            {
-                cardUI.SetHighlight(cardUI == clickedCard);
-                if (cardUI == clickedCard)
-                {
-                    cardUI.AnimateUP();
-                }
-                else
-                {
-                    cardUI.AnimateDown();
-                }
-            }
-        }
-
-        DOVirtual.DelayedCall(0.6f, () => DestroySpwanedCards());
-
-        // TODO: battle logic trigger
+        OnCardClickedExternally(clickedCard);
     }
 
     // Use this tirgger.

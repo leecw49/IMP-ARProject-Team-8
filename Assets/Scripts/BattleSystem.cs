@@ -8,11 +8,9 @@ public class BattleSystem : MonoBehaviour
 
     public Player player;
     public Enemy enemy;
-    //public GameObject Player;
-   // public GameObject Enemy;
 
     private Turn turn = Turn.PlayerWait;
-    private float tick;//
+    private float tick;
 
     private Texture2D _redTexture, _grayTexture;
     private SoundPlayer _soundPlayer;
@@ -21,12 +19,13 @@ public class BattleSystem : MonoBehaviour
     public GameObject winImage;
     public GameObject loseImage;
 
-
-    // test용. 나중에 수정
     public TextMeshProUGUI playerHpTMP;
     public TextMeshProUGUI enemyHpTMP;
     public GameObject winButton;
     public GameObject loseButton;
+    public GameObject EnemyKilledTMP;
+    // for testing. Change this to icon.
+    public TextMeshProUGUI enemyActionTMP;
 
     private void Awake()
     {
@@ -36,13 +35,11 @@ public class BattleSystem : MonoBehaviour
 
     private void Init()
     {
-        //player = GameManager.Instance.player;
         player = Player.Instance;
-        enemy = FindAnyObjectByType<Enemy>();
-        if (enemy == null)
-        {
-            Debug.LogError("BattleScene에 Enemy 오브젝트가 없습니다!");
-        }
+        enemy = Enemy.Instance;
+        //enemy = FindAnyObjectByType<Enemy>();
+        enemy.ChangeActon();
+        UpdateEnemyNextAction();
     }
 
     private void Start()
@@ -50,7 +47,6 @@ public class BattleSystem : MonoBehaviour
         //_soundPlayer = GameObject.FindWithTag("SoundPlayer").GetComponent<SoundPlayer>();
 
         //enemy.NewAction();
-        //player.BackupCards();
 
         SpawnPlayerCards();
 
@@ -58,6 +54,7 @@ public class BattleSystem : MonoBehaviour
         if (loseImage != null) loseImage.SetActive(false);
         if (winButton != null) winButton.SetActive(false);
         if (loseButton != null) loseButton.SetActive(false);
+        EnemyKilledTMP.SetActive(false);
 
         // 선택된 적 프리팹을 3D 공간의 중앙(카메라 앞) 위치에 생성
         if (GameManager.Instance.selectedEnemyPrefab != null)
@@ -69,7 +66,7 @@ public class BattleSystem : MonoBehaviour
 
             enemyObj.transform.localScale = Vector3.one * 0.5f; // 필요 시 조절
 
-            enemy = enemyObj.GetComponent<Enemy>();
+            //enemy = enemyObj.GetComponent<Enemy>();
         }
 
 
@@ -90,11 +87,9 @@ public class BattleSystem : MonoBehaviour
         else if (turn == Turn.EnemyWait)
         {
             NextTurn();
-        } 
+        }
 
-        //test용. 나중에 수정
-        playerHpTMP.text = "Player HP: " + player.hp.ToString();
-        enemyHpTMP.text = "Enemy HP: " + enemy.hp.ToString();
+        UpdateHpTMP();
     }
 
     public void UseCard(Card cardSO)
@@ -115,28 +110,20 @@ public class BattleSystem : MonoBehaviour
         switch (turn)
         {
             case Turn.PlayerWait:
+                enemy.ChangeActon();
+                // for testing
+                UpdateEnemyNextAction();
                 turn = Turn.PlayerAnimation;
                 break;
             case Turn.PlayerAnimation:
                 turn = Turn.EnemyWait;
                 break;
             case Turn.EnemyWait:
-                /*
-                if (enemy.action is Attack attackAction)
-                {
-                    player.hp -= attackAction.amount;
-                    _soundPlayer.punch.Play();
-                }
-                else if (enemy.action is Heal healAction)
-                {
-                    enemy.hp = Math.Min(enemy.hp + healAction.amount, enemy.maxHp);
-                }
-                */
-                player.TakeDamage(3);
+                // do we need this turn?
                 turn = Turn.EnemyAnimation;
                 break;
             case Turn.EnemyAnimation:
-                //enemy.NewAction();
+                enemy.DoAction(player, enemy);
                 turn = Turn.PlayerWait;
                 SpawnPlayerCards();
                 break;
@@ -151,9 +138,8 @@ public class BattleSystem : MonoBehaviour
 
             if (winButton != null) winButton.SetActive(true);
 
-            //player.ResetCards();
-            //CardType randomType = (CardType)UnityEngine.Random.Range(0, 3);
-            //player.AddCardReward(randomType);
+            GameManager.Instance.enemyKilled++;
+            ShowKillCount();
         }
         else if (player.hp <= 0)
         {
@@ -161,19 +147,35 @@ public class BattleSystem : MonoBehaviour
 
             if (loseButton != null) loseButton.SetActive(true);
 
-            //player.ResetCards();
+            ShowKillCount();
         }
+    }
+
+    private void ShowKillCount()
+    {
+        int killCount = GameManager.Instance.enemyKilled;
+        EnemyKilledTMP.SetActive(true);
+
+        string countText = "";
+        if (killCount == 0) { countText = "You couldn't kill the enemy."; }
+        else if (killCount == 1) { countText = "You killed one enemy."; }
+        else { countText = $"You killed {killCount} enemies.";  }
+
+        EnemyKilledTMP.GetComponent<TextMeshProUGUI>().text = countText;
     }
 
     public void Button_Win()
     {
         // SET Scene 1 to ARImageTrackingScene!!
         SceneManager.LoadScene(1);
+        enemy.ResetEnemyHp(10);
     }
 
     public void Button_Lose()
     {
         // SET Scene 0 to MainMenuScene!!
+        GameManager.Instance.ResetPlayer();
+        enemy.ResetEnemyHp(10);
         SceneManager.LoadScene(0);
     }
 
@@ -182,11 +184,18 @@ public class BattleSystem : MonoBehaviour
         CardUIManager.Inst.DrawNewDeck();
     }
 
-    private void UpdateEnemyHpUI()
+    private void UpdateHpTMP()
     {
+        playerHpTMP.text = "Player HP: " + player.hp.ToString();
         enemyHpTMP.text = "Enemy HP: " + enemy.hp.ToString();
-    }//
+    }
 
+    private void UpdateEnemyNextAction()
+    {
+        enemyActionTMP.text = "Enemy Next Action: " + enemy.GetCurrentActionName();
+    }
+
+    /*
     private void OnGUI()
     {
         float margin = 10;
@@ -216,5 +225,6 @@ public class BattleSystem : MonoBehaviour
         GUI.Box(new Rect(xMin, yMin, width * player.hp / player.maxHp, height), GUIContent.none);
         GUI.Box(new Rect(xMin, yMin + height + margin, width * enemy.hp / enemy.maxHp, height), GUIContent.none);
     }
+    */
 }
 
