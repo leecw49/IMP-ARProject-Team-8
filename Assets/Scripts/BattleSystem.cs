@@ -209,7 +209,7 @@ public class BattleSystem : MonoBehaviour
         enemyActionTMP.text = "Enemy Next Action: " + enemy.GetCurrentActionName();
     }
 
-    /*
+    
     private void OnGUI()
     {
         float margin = 10;
@@ -239,6 +239,6 @@ public class BattleSystem : MonoBehaviour
         GUI.Box(new Rect(xMin, yMin, width * player.hp / player.maxHp, height), GUIContent.none);
         GUI.Box(new Rect(xMin, yMin + height + margin, width * enemy.hp / enemy.maxHp, height), GUIContent.none);
     }
-    */
+    
 }
 
