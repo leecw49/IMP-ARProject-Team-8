@@ -17,7 +17,7 @@ public class PortalSpawner : MonoBehaviour
         imageManager = GetComponent<ARTrackedImageManager>();
         mainCamera = Camera.main;
     }
-
+    
     private void OnEnable()
     {
         imageManager.trackedImagesChanged += OnImageChanged;
@@ -74,6 +74,8 @@ public class PortalSpawner : MonoBehaviour
 
             GameObject spawned = Instantiate(selectedPrefab, image.transform.position, Quaternion.identity);
             spawnedPrefabs[name] = spawned;
+
+            GameManager.Instance.selectedEnemyPrefab = selectedPrefab;
 
             if (selectedPrefab.name.Contains("Mushroom"))
             {

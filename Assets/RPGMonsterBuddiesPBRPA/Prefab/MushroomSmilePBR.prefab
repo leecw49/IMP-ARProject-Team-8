@@ -143,6 +143,7 @@ GameObject:
   - component: {fileID: 1691260113314563210}
   - component: {fileID: -7174330518515658959}
   - component: {fileID: 2570752203147186369}
+  - component: {fileID: 5602327951281852698}
   m_Layer: 0
   m_Name: MushroomSmilePBR
   m_TagString: Monster
@@ -222,6 +223,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca56d06b3ee270d409d16898efb07cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5602327951281852698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997902569578628670}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e50a24727e4fbfb49b2354d399b2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 10
+  hp: 10
+  icon: {fileID: 0}
+  attackIcon: {fileID: 0}
+  healIcon: {fileID: 0}
 --- !u!1 &2411188951558394283
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,6 +12,7 @@ public class BattleSystem : MonoBehaviour
    // public GameObject Enemy;
 
     private Turn turn = Turn.PlayerWait;
+    private float tick;//
 
     private Texture2D _redTexture, _grayTexture;
     private SoundPlayer _soundPlayer;
@@ -20,7 +21,6 @@ public class BattleSystem : MonoBehaviour
     public GameObject winImage;
     public GameObject loseImage;
 
-    private float tick;
 
     // test용. 나중에 수정
     public TextMeshProUGUI playerHpTMP;
@@ -38,9 +38,11 @@ public class BattleSystem : MonoBehaviour
     {
         //player = GameManager.Instance.player;
         player = Player.Instance;
-
-        // test용. 나중에 수정
         enemy = FindAnyObjectByType<Enemy>();
+        if (enemy == null)
+        {
+            Debug.LogError("BattleScene에 Enemy 오브젝트가 없습니다!");
+        }
     }
 
     private void Start()
@@ -54,9 +56,23 @@ public class BattleSystem : MonoBehaviour
 
         if (winImage != null) winImage.SetActive(false);
         if (loseImage != null) loseImage.SetActive(false);
-
         if (winButton != null) winButton.SetActive(false);
         if (loseButton != null) loseButton.SetActive(false);
+
+        // 선택된 적 프리팹을 3D 공간의 중앙(카메라 앞) 위치에 생성
+        if (GameManager.Instance.selectedEnemyPrefab != null)
+        {
+            Vector3 spawnPos = Camera.main.transform.position + Camera.main.transform.forward * 2.0f;
+            Quaternion spawnRot = Quaternion.LookRotation(-Camera.main.transform.forward);
+
+            GameObject enemyObj = Instantiate(GameManager.Instance.selectedEnemyPrefab, spawnPos, spawnRot);
+
+            enemyObj.transform.localScale = Vector3.one * 0.5f; // 필요 시 조절
+
+            enemy = enemyObj.GetComponent<Enemy>();
+        }
+
+
     }
 
     private void Update()
@@ -166,6 +182,11 @@ public class BattleSystem : MonoBehaviour
         CardUIManager.Inst.DrawNewDeck();
     }
 
+    private void UpdateEnemyHpUI()
+    {
+        enemyHpTMP.text = "Enemy HP: " + enemy.hp.ToString();
+    }//
+
     private void OnGUI()
     {
         float margin = 10;
@@ -193,6 +214,7 @@ public class BattleSystem : MonoBehaviour
 
         GUI.skin.box.normal.background = _redTexture;
         GUI.Box(new Rect(xMin, yMin, width * player.hp / player.maxHp, height), GUIContent.none);
+        GUI.Box(new Rect(xMin, yMin + height + margin, width * enemy.hp / enemy.maxHp, height), GUIContent.none);
     }
 }
 

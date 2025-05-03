@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 6096312193273766057}
   - component: {fileID: 3528621907929217700}
   - component: {fileID: -6841637572880847903}
+  - component: {fileID: 9051242934071893046}
   m_Layer: 0
   m_Name: CactusPBR
   m_TagString: Monster
@@ -188,6 +189,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca56d06b3ee270d409d16898efb07cac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &9051242934071893046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 662468794185850985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e50a24727e4fbfb49b2354d399b2b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHp: 10
+  hp: 10
+  icon: {fileID: 0}
+  attackIcon: {fileID: 0}
+  healIcon: {fileID: 0}
 --- !u!1 &1006438018938304421
 GameObject:
   m_ObjectHideFlags: 0

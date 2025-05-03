@@ -7,6 +7,8 @@ public class GameManager : Singleton<GameManager>
     //public Player player;
     public Enemy enemy;
 
+    public GameObject selectedEnemyPrefab;
+
     //public GameObject battleSystem;
 
     //public GameObject menuPanel;
