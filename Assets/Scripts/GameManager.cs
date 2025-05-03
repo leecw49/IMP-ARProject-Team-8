@@ -58,8 +58,18 @@ public class GameManager : Singleton<GameManager>
     }
     */
 
+    //StartButton function
     public void SceneButton_1()
     {
         SceneManager.LoadScene(1);
+    }
+
+    //CloseButton function
+    public void CloseGame()
+    {
+        Application.Quit();
+#if UNITY_EDITOR
+    UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
 }
