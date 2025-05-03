@@ -50,44 +50,4 @@ public class Player : Singleton<Player>
         baseDamage = 2;
         powerUpFactor = 1;
     }
-
-    // 기존 코드 - 아마 이 밑으로 싹 지워야할듯? ===================================
-    /*
-    public Dictionary<CardType, int> cardCounts = new();
-    private Dictionary<CardType, int> _cardBackup = new();
-
-    private void Start()
-    {
-        cardCounts[CardType.Attack] = 2;
-        cardCounts[CardType.Defense] = 2;
-        cardCounts[CardType.Explosion] = 2;
-
-        BackupCards();
-    }
-
-    public void BackupCards()
-    {
-        _cardBackup = new Dictionary<CardType, int>(cardCounts);
-    }
-
-    public void ResetCards()
-    {
-        cardCounts = new Dictionary<CardType, int>(_cardBackup);
-    }
-
-    public void AddCardReward(CardType type)
-    {
-        cardCounts[type]++;
-    }
-
-    public bool UseCard(CardType type)
-    {
-        if (cardCounts.ContainsKey(type) && cardCounts[type] > 0)
-        {
-            cardCounts[type]--;
-            return true;
-        }
-        return false;
-    }
-    */
 }
