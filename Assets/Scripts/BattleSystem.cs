@@ -66,7 +66,7 @@ public class BattleSystem : MonoBehaviour
 
             enemyObj.transform.localScale = Vector3.one * 0.5f; // 필요 시 조절
 
-            enemy = enemyObj.GetComponent<Enemy>();
+            //enemy = enemyObj.GetComponent<Enemy>();
         }
 
 
