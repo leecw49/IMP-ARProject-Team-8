@@ -1626,6 +1626,7 @@ MonoBehaviour:
   loseButton: {fileID: 618542773}
   EnemyKilledTMP: {fileID: 812407772}
   enemyActionTMP: {fileID: 1014411194}
+  battleMusicClip: {fileID: 8300000, guid: b442123a67071894ca2beeb4a6185aae, type: 3}
 --- !u!4 &1515159721
 Transform:
   m_ObjectHideFlags: 0

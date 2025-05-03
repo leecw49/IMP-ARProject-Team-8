@@ -197,9 +197,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d27c1b764695b74184de065938afa30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonClickSound: {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
   enemy: {fileID: 0}
   selectedEnemyPrefab: {fileID: 0}
   enemyKilled: 0
+  mainMenuCanvas: {fileID: 0}
 --- !u!1 &695403464
 GameObject:
   m_ObjectHideFlags: 0

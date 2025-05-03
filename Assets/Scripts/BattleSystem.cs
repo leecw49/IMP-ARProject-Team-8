@@ -13,7 +13,6 @@ public class BattleSystem : MonoBehaviour
     private float tick;
 
     private Texture2D _redTexture, _grayTexture;
-    private SoundPlayer _soundPlayer;
 
     [Header("Result Images")]
     public GameObject winImage;
@@ -26,6 +25,10 @@ public class BattleSystem : MonoBehaviour
     public GameObject EnemyKilledTMP;
     // for testing. Change this to icon.
     public TextMeshProUGUI enemyActionTMP;
+
+    //BGM
+    private AudioSource battleMusicSource;
+    public AudioClip battleMusicClip;
 
     private void Awake()
     {
@@ -68,6 +71,12 @@ public class BattleSystem : MonoBehaviour
 
             //enemy = enemyObj.GetComponent<Enemy>();
         }
+
+        battleMusicSource = gameObject.AddComponent<AudioSource>();
+        battleMusicSource.clip = battleMusicClip;
+        battleMusicSource.loop = true;
+        battleMusicSource.playOnAwake = false;
+        battleMusicSource.Play();
 
 
     }
@@ -132,6 +141,11 @@ public class BattleSystem : MonoBehaviour
 
     private void EndBattle()
     {
+        if (battleMusicSource != null && battleMusicSource.isPlaying)
+        {
+            battleMusicSource.Stop();
+        }
+
         if (enemy.hp <= 0)
         {
             if (winImage != null) winImage.SetActive(true);

@@ -12,5 +12,6 @@ public class AttackCard : Card
         enemy.TakeDamage(attackDamage);
         Debug.Log($"[Attack Card] used! Dealt {damage} damage.");
         //throw new System.NotImplementedException();
+
     }
 }
